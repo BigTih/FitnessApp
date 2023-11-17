@@ -1,17 +1,40 @@
 document.addEventListener("DOMContentLoaded", function() {
-    // Add event listeners for navigation links
-    const navLinks = document.querySelectorAll('nav ul li a');
+    // Select navigation links
+    const navLinks = document.querySelectorAll('nav a');
+    
+    // Add click event listeners to each link
     navLinks.forEach(link => {
         link.addEventListener('click', function(event) {
+            // Prevent default link behavior
             event.preventDefault();
-            loadSectionContent(event.target.getAttribute('href'));
+
+            // Get the href attribute of the clicked link
+            const page = event.target.getAttribute('href');
+
+            // Redirect to the clicked link's href
+            window.location.href = page;
         });
     });
 
-    function loadSectionContent(sectionId) {
-        // Placeholder for dynamic content loading logic
-        console.log(`Loading content for ${sectionId}`);
+    // Add event listener for the Get Started button
+    const getStartedButton = document.querySelector('.btn-start');
+    if (getStartedButton) {
+        getStartedButton.addEventListener('click', function(event) {
+            event.preventDefault();
+            window.location.href = getStartedButton.getAttribute('href');
+        });
     }
 
-    // Additional functionalities can be added here
+    const form = document.getElementById('start-form');
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const username = document.getElementById('username').value;
+        console.log('Username:', username); // For debugging
+
+        // Here you would typically make an AJAX request to your server
+        //sendDataToServer(username);
+    });
+
+
 });
